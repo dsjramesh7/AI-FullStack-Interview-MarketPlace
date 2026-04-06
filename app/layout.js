@@ -18,11 +18,30 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    <ClerkProvider
+      appearance={{
+        theme: dark,
+      }}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
-    </html>
+      <html lang="en" suppressHydrationWarning>
+        <head />
+        <body className={`${lora.variable} ${dmSans.variable} font-sans`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Toaster richColors />
+
+            <footer className="relative z-10 border-t border-white/7 py-12  mx-auto px-6 flex flex-wrap items-center justify-center text-stone-400">
+              Made with ❤️
+            </footer>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
